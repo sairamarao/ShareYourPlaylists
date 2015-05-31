@@ -2,6 +2,7 @@ package com.sairamarao.shareyourplaylists;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,7 +31,7 @@ import java.util.Map;
 public class Playlists extends ListActivity{
 
     Map<Integer,String> getplayListIDs = new HashMap<Integer,String>();
-
+    String shareText = " ";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,7 @@ public class Playlists extends ListActivity{
                 MediaStore.Audio.Playlists.Members._ID
         };
         Uri Songs = MediaStore.Audio.Playlists.Members.getContentUri("external",Long.valueOf(PlaylistID).longValue());
-        Cursor c = getContentResolver().query(Songs,proj,null,null,null);
+        Cursor c = getContentResolver().query(Songs, proj, null, null, null);
         if (c.getCount() == 0)
             Log.e("Songs", "No Songs available.");
         Log.e("Songs"," "+c.getCount());
@@ -84,6 +85,7 @@ public class Playlists extends ListActivity{
         {
             s = c.getString(c.getColumnIndex(MediaStore.Audio.Playlists.Members.TITLE));
             Log.e("Songs"," "+i+" "+s);
+            shareText = shareText+"\n"+i+" "+s;
             i++;
         }
 
@@ -99,6 +101,11 @@ public class Playlists extends ListActivity{
         {
             case R.id.action_share:
 
+                Intent sendIntent = new Intent(android.content.Intent.ACTION_SEND);
+                sendIntent.setType("text/plain");
+                sendIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Songs: \n");
+                sendIntent.putExtra(android.content.Intent.EXTRA_TEXT,shareText);
+                startActivity(sendIntent);
                 return true;
             default:
                 return super.onContextItemSelected(item);

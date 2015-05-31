@@ -1,0 +1,50 @@
+﻿ShareYourPlaylists: Get songs from the Playlists
+
+This patch adds code to get the songs from the
+playlist you have selected to share.
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   .gitattributes
+#	modified:   .gitignore
+#	modified:   .idea/.name
+#	modified:   .idea/compiler.xml
+#	modified:   .idea/copyright/profiles_settings.xml
+#	modified:   .idea/gradle.xml
+#	modified:   .idea/misc.xml
+#	modified:   .idea/modules.xml
+#	modified:   .idea/vcs.xml
+#	modified:   ShareYourPlaylists.iml
+#	modified:   app/.gitignore
+#	modified:   app/app.iml
+#	modified:   app/build.gradle
+#	modified:   app/proguard-rules.pro
+#	modified:   app/src/androidTest/java/com/sairamarao/shareyourplaylists/ApplicationTest.java
+#	modified:   app/src/main/AndroidManifest.xml
+#	modified:   app/src/main/java/com/sairamarao/shareyourplaylists/Playlists.java
+#	new file:   app/src/main/res/drawable/listitem_selector.xml
+#	modified:   app/src/main/res/layout/activity_playlists.xml
+#	modified:   app/src/main/res/layout/row.xml
+#	new file:   app/src/main/res/menu/main.xml
+#	modified:   app/src/main/res/menu/menu_playlists.xml
+#	modified:   app/src/main/res/mipmap-hdpi/ic_launcher.png
+#	modified:   app/src/main/res/mipmap-mdpi/ic_launcher.png
+#	modified:   app/src/main/res/mipmap-xhdpi/ic_launcher.png
+#	modified:   app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+#	modified:   app/src/main/res/values-w820dp/dimens.xml
+#	modified:   app/src/main/res/values/dimens.xml
+#	modified:   app/src/main/res/values/strings.xml
+#	modified:   app/src/main/res/values/styles.xml
+#	modified:   build.gradle
+#	modified:   gradle.properties
+#	modified:   gradle/wrapper/gradle-wrapper.jar
+#	modified:   gradle/wrapper/gradle-wrapper.properties
+#	modified:   gradlew
+#	modified:   gradlew.bat
+#	modified:   l0ze3mti.mwd.txt
+#	modified:   settings.gradle
+#
+
