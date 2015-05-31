@@ -7,9 +7,10 @@
         android:layout_height="match_parent"
         android:id="@+id/playlistname"
         android:textSize="32sp"/>
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/playlistid"
         android:textSize="32sp"/>
+        -->
 </RelativeLayout>
