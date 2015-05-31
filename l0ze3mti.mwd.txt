@@ -1,0 +1,48 @@
+﻿ShareYourPlaylists: Displays playlists on your phone
+
+This commit contains code which displays all the playlists present in
+your phone.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is behind 'origin/master' by 3 commits, and can be fast-forwarded.
+#   (use "git pull" to update your local branch)
+#
+# Changes to be committed:
+#	new file:   .gitignore
+#	new file:   .idea/.name
+#	new file:   .idea/compiler.xml
+#	new file:   .idea/copyright/profiles_settings.xml
+#	new file:   .idea/gradle.xml
+#	new file:   .idea/misc.xml
+#	new file:   .idea/modules.xml
+#	new file:   .idea/vcs.xml
+#	new file:   ShareYourPlaylists.iml
+#	new file:   app/.gitignore
+#	new file:   app/app.iml
+#	new file:   app/build.gradle
+#	new file:   app/proguard-rules.pro
+#	new file:   app/src/androidTest/java/com/sairamarao/shareyourplaylists/ApplicationTest.java
+#	new file:   app/src/main/AndroidManifest.xml
+#	new file:   app/src/main/java/com/sairamarao/shareyourplaylists/Playlists.java
+#	new file:   app/src/main/res/layout/activity_playlists.xml
+#	new file:   app/src/main/res/layout/row.xml
+#	new file:   app/src/main/res/menu/menu_playlists.xml
+#	new file:   app/src/main/res/mipmap-hdpi/ic_launcher.png
+#	new file:   app/src/main/res/mipmap-mdpi/ic_launcher.png
+#	new file:   app/src/main/res/mipmap-xhdpi/ic_launcher.png
+#	new file:   app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+#	new file:   app/src/main/res/values-w820dp/dimens.xml
+#	new file:   app/src/main/res/values/dimens.xml
+#	new file:   app/src/main/res/values/strings.xml
+#	new file:   app/src/main/res/values/styles.xml
+#	new file:   build.gradle
+#	new file:   gradle.properties
+#	new file:   gradle/wrapper/gradle-wrapper.jar
+#	new file:   gradle/wrapper/gradle-wrapper.properties
+#	new file:   gradlew
+#	new file:   gradlew.bat
+#	new file:   settings.gradle
+#
+
