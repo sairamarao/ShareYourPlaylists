@@ -17,12 +17,16 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.database.Cursor;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,6 +38,7 @@ public class Playlists extends ListActivity{
 
     Map<Integer,String> getplayListIDs = new HashMap<Integer,String>();
     String shareText = " ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,29 +47,27 @@ public class Playlists extends ListActivity{
         Uri PlaylistURI = MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
         Cursor cursor = getContentResolver().query(PlaylistURI,projection,null,null,null);
         //Cursor database has the data rows with the following columns playlistID and playlistName.
-        if (cursor.getCount() == 0)
-            Log.e("Playlists", "No Playlists available.");
-        /* TODO: Add error message view element for no playlists*/
-        Log.e("Playlists"," "+cursor.getCount());
+        Log.d("Playlists","Count: "+cursor.getCount());
         String s = null;
-        int i = 1;
+        int i = 1;//0 is reserved for All Songs position
         //Maintain a Hashmap for Playlist position and its ID.
-        for(boolean hasItem = cursor.moveToFirst();hasItem;hasItem = cursor.moveToNext())
+        while(cursor.moveToNext())
         {
             s = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Playlists._ID));
             getplayListIDs.put(new Integer(i),s);
-            Log.e("Playlists"," "+i+" "+s);
+            Log.d("Playlists"," "+i+" "+s);
             i++;
         }
 
-        String[] from = {MediaStore.Audio.Playlists.NAME};
-        int[] to = {R.id.playlistname};
         //Adding All Songs option
         MatrixCursor extras = new MatrixCursor(new String[] {MediaStore.Audio.Playlists._ID,MediaStore.Audio.Playlists.NAME});
         extras.addRow(new String[] { "-1","All Songs"});
         getplayListIDs.put(new Integer(0),"-1");
         Cursor[] cursors = {extras, cursor};
         Cursor extendedcursor = new MergeCursor(cursors);
+
+        String[] from = {MediaStore.Audio.Playlists.NAME};
+        int[] to = {R.id.playlistname};
         final SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,R.layout.row,extendedcursor,from,to,0);
         final ListView listView = (ListView)findViewById(android.R.id.list);
         listView.setAdapter(adapter);
@@ -75,12 +78,13 @@ public class Playlists extends ListActivity{
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
+        shareText = "";
         ListView list = (ListView)v;
         AdapterContextMenuInfo info = (AdapterContextMenuInfo)menuInfo;
         int position = info.position;
+        shareText += ((TextView)info.targetView.findViewById(R.id.playlistname)).getText().toString();
         String PlaylistID = getplayListIDs.get(new Integer(position));
-        Log.e("Playlists"," "+position+" "+ PlaylistID);
-        if (position == 0)
+        if (position == 0)//All Songs Option
         {
             String[] Allsongsproj = {MediaStore.Audio.Media._ID,
                     MediaStore.Audio.Media.ARTIST,
@@ -94,19 +98,15 @@ public class Playlists extends ListActivity{
             if (AllSongsCursor!=null)
             {
                 int j = 1;
-                String temp = " ";
-                while(AllSongsCursor.moveToNext())
-                {
-                    temp = AllSongsCursor.getString(AllSongsCursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
-                    Log.e("OnCreateContextMenu: ", temp);
-                    shareText = shareText + "\n" + j + " "+ temp;
+                String name = " ";
+                while(AllSongsCursor.moveToNext()) {
+                    name = AllSongsCursor.getString(AllSongsCursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
+                    shareText = shareText + "\n" + j + " "+ name;
                     j++;
                 }
             }
             else
                 Log.e("OnCreateContextMenu: ","AllSongsCursor is null");
-
-
         }
         else
         {
@@ -119,19 +119,16 @@ public class Playlists extends ListActivity{
 
             Uri Songs = MediaStore.Audio.Playlists.Members.getContentUri("external", Long.valueOf(PlaylistID).longValue());
             Cursor c = getContentResolver().query(Songs, Playproj, null, null, null);
-            if (c.getCount() == 0)
-                Log.e("Songs", "No Songs available.");
-            Log.e("Songs", " " + c.getCount());
-            String s = null;
+            String title = "";
             int i = 1;
-            for (boolean hasItem = c.moveToFirst(); hasItem; hasItem = c.moveToNext()) {
-                s = c.getString(c.getColumnIndex(MediaStore.Audio.Playlists.Members.TITLE));
-                Log.e("Songs", " " + i + " " + s);
-                shareText = shareText + "\n" + i + " " + s;
+            while(c.moveToNext()) {
+                title = c.getString(c.getColumnIndex(MediaStore.Audio.Playlists.Members.TITLE));
+                shareText = shareText + "\n" + i + " " + title;
                 i++;
             }
         }
 
+        Log.e("OnCreateContextMenu:", shareText);
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main,menu);
     }

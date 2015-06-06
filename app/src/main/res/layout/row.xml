@@ -7,7 +7,12 @@
         android:layout_height="match_parent"
         android:id="@+id/playlistname"
         android:textSize="32sp"/>
-    <!--<TextView
+    <!--<CheckBox
+        android:id="@+id/checkbox"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"/>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/playlistid"
